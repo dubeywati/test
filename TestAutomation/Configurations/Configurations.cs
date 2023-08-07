@@ -49,7 +49,7 @@ namespace TestAutomation
 		void LoadSeetingsForGitHubAction()
         {
 
-            GitHubUser = "dubeywati";
+            GitHubUser = "aaditya_20";
             BranchName = Environment.GetEnvironmentVariable("branch");
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
             URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
