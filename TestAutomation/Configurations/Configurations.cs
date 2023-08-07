@@ -38,18 +38,18 @@ namespace TestAutomation
 
 
 
-            CheckBuildStatus();
+            //CheckBuildStatus();
 
-            TriggerJenkinsJob();
+            //TriggerJenkinsJob();
 
-            CheckBuildStatus();
+            //CheckBuildStatus();
 
         }
 
 		void LoadSeetingsForGitHubAction()
         {
-            
-            GitHubUser = Environment.GetEnvironmentVariable("username");
+
+            GitHubUser = "aaditya_20";
             BranchName = Environment.GetEnvironmentVariable("branch");
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
             URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
@@ -61,14 +61,14 @@ namespace TestAutomation
 
         void LoadSeetingsForLocalRun()
         {
-            GitHubUser = "cmnawagamuwa";
-            BranchName = "WATI-5600-regression-test-automation-using-Selenium";
-            JenkinsApiToken = "11fa578250a0669701d9a2b66354a2c441";
-            URL = "https://wati-demo15.clare.ai";
-            JenkinsUser = "chathura";
-            Username = "vernal@clare.ai";
-            Password = "Test1234!";
-            JenkinsJobName = "DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914";
+            GitHubUser = "aaditya-20";
+            BranchName = "master";
+            JenkinsApiToken = "11ba9807c51334e9f5a7a9a7db8eabaa24";
+            URL = "https://live-104103.watiapp.io";
+            JenkinsUser = "aaditya_20";
+            Username = "aaditya@clare.ai";
+            Password = "aA9SEk6tYj&ihBRcxOZ6";
+            JenkinsJobName = "first-job";
         }
 
         public void TriggerJenkinsJob()

@@ -11,7 +11,7 @@ namespace TestAutomation
             this.webDriver = webDriver;
         }
 
-        public IWebElement ProfileAvatarButton => webDriver.Driver.FindElement(By.CssSelector("[aria-label='account of current user']"));
+        public IWebElement ProfileAvatarButton => webDriver.Driver.FindElement(By.CssSelector("[data-testid='headerNavBar-accountDrawer-button']"));
 
         public IWebElement SignoutBtn => webDriver.Driver.FindElement(By.CssSelector("[data-testid='profileMenu-firstGroup-signOut-button']"));
 
