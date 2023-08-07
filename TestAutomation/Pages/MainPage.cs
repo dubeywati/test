@@ -1,4 +1,4 @@
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace TestAutomation
@@ -11,11 +11,11 @@ namespace TestAutomation
             this.webDriver = webDriver;
         }
 
-        public IWebElement ProfileAvatarButton => webDriver.Driver.FindElement(By.XPath("//div[@data-testid='headerNavBar-accountDrawer']"));
+        public IWebElement ProfileAvatarButton => webDriver.Driver.FindElement(By.CssSelector("[data-testid='headerNavBar-accountDrawer-button']"));
 
-        public IWebElement SignoutBtn => webDriver.Driver.FindElement(By.XPath("//button[@color='primary' and contains(text(), 'Sign out')]"));
+        public IWebElement SignoutBtn => webDriver.Driver.FindElement(By.CssSelector("[data-testid='profileMenu-firstGroup-signOut-button']"));
 
-        public IWebElement SignoutConfirmedBtn => webDriver.Driver.FindElement(By.XPath("//button[@color='negative' and contains(text(), 'Sign out')]"));
+        public IWebElement SignoutConfirmedBtn => webDriver.Driver.FindElement(By.CssSelector("[data-testid='modals-confirmDialog-content-buttons-negative-button']"));
 
         public void VerifyLogin()
         {
