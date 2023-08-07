@@ -49,8 +49,8 @@ namespace TestAutomation
         void LoadSeetingsForGitHubAction()
         {
 
-            GitHubUser = Environment.GetEnvironmentVariable("USERNAME");
-            BranchName = Environment.GetEnvironmentVariable("BRANCH");
+            GitHubUser = Environment.GetEnvironmentVariable("username");
+            BranchName = Environment.GetEnvironmentVariable("branch");
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
             URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
             JenkinsUser = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_USER");
