@@ -38,11 +38,11 @@ namespace TestAutomation
 
 
 
-            //CheckBuildStatus();
+            CheckBuildStatus();
 
-            //TriggerJenkinsJob();
+            TriggerJenkinsJob();
 
-            //CheckBuildStatus();
+            CheckBuildStatus();
 
         }
 
