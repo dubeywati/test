@@ -50,7 +50,7 @@ namespace TestAutomation
         {
 
             GitHubUser = "dubeywati";
-            BranchName = 'master';
+            BranchName = "master";
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
             URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
             JenkinsUser = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_USER");
