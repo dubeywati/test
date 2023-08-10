@@ -59,17 +59,18 @@ namespace TestAutomation
             JenkinsJobName = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_DEPLOYMENT_JOB_NAME");
         }
 
-        void LoadSeetingsForLocalRun()
+      void LoadSeetingsForLocalRun()
         {
-            GitHubUser = "aaditya-20";
+            GitHubUser = "dubeywati";
             BranchName = "master";
-            JenkinsApiToken = "11ba9807c51334e9f5a7a9a7db8eabaa24";
-            URL = "https://live-104103.watiapp.io";
-            JenkinsUser = "aaditya_20";
-            Username = "aaditya@clare.ai";
-            Password = "aA9SEk6tYj&ihBRcxOZ6";
-            JenkinsJobName = "first-job";
+            JenkinsApiToken = "111189db382717f939012be0b4b14dfa72";
+            URL = "https://live-300005.watiapp.io/";
+            JenkinsUser = "abhishek";
+            Username = "abhishek@clare.ai";
+            Password = "Abhishek@1";
+            JenkinsJobName = "wati";
         }
+
 
         public void TriggerJenkinsJob()
         {
