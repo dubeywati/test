@@ -23,8 +23,10 @@ namespace TestAutomation
             Assert.That(messageButton.Displayed, Is.True);
              WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
              wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector($"[class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk']")));
-            var crossPopUpButton = webDriver.Driver.FindElement(By.CssSelector($"[class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk']"));
-            crossPopUpButton.Click();
+           IWebElement buttonElement = webDriver.Driver.FindElement(By.CssSelector("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1yxmbwk"));
+
+            // Click on the button
+            buttonElement.Click();
             Task.Delay(1000).Wait();
         }       
 
