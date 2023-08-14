@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace TestAutomation
@@ -21,6 +21,10 @@ namespace TestAutomation
         {
             var messageButton = webDriver.Driver.FindElement(By.CssSelector("[data-testid='teamInbox-leftSide-actionBar-newMessage-button']"));
             Assert.That(messageButton.Displayed, Is.True);
+             WebDriverWait wait = new WebDriverWait(webDriver.Driver, TimeSpan.FromSeconds(15));
+             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector($"[class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk']")));
+            var crossPopUpButton = webDriver.Driver.FindElement(By.CssSelector($"[class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk']"));
+            crossPopUpButton.Click();
             Task.Delay(1000).Wait();
         }       
 
