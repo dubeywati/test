@@ -47,7 +47,7 @@ jobs:
         fail-on-error: true
 
     - name: Add Comment to PR
-      if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
+      
       run: |
         PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
         COMMENT="Your comment goes here."
