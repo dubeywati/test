@@ -52,4 +52,4 @@ jobs:
         PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
         COMMENT="Your comment goes here."
         API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
-        echo "{\"body\": \"${COMMENT}\"}" | curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d @- ${API_URL}
+        echo "{\"body\": \"${COMMENT}\"}" | curl -X POST -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" -d @- ${API_URL}
