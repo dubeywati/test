@@ -1,37 +1,33 @@
-name: main
+name: Main Branch PR Workflow
 
 on:
-  #push:
   workflow_dispatch:
     inputs:
       branch_name:
         required: true
         type: string
+  pull_request:
+    types:
+      - opened
+
 env:
-  username: "${{github.actor}}"
+  username: "${{ github.actor }}"
   branch: "${{ github.event.inputs.branch_name }}"
-  
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
-    steps: 
-    
+    steps:
     - uses: oNaiPs/secrets-to-env-action@v1
       with:
         secrets: ${{ toJSON(secrets) }}
-    #- run: echo "Value of MY_SECRET1 $CMNAWAGAMUWA_DEV_PASSWORD"
-      
-   # - name: test curl
-      #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=${{ github.event.inputs.branch_name }}    
-      #run: echo "${{ github.event.inputs.branch_name }}"
-      
-    - name: Checkout  
-      uses: actions/checkout@v1
+
+    - name: Checkout
+      uses: actions/checkout@v2
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
 
@@ -46,6 +42,14 @@ jobs:
       if: always()
       with:
         name: Regression Test Report
-        path: "**/test-results.trx"                            
-        reporter: dotnet-trx     
-        fail-on-error: true     
+        path: "**/test-results.trx"
+        reporter: dotnet-trx
+        fail-on-error: true
+
+    - name: Add Comment to PR
+      if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
+      run: |
+        PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
+        COMMENT="Your comment goes here."
+        API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
+        echo "{\"body\": \"${COMMENT}\"}" | curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d @- ${API_URL}
