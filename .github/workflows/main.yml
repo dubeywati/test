@@ -1,6 +1,5 @@
-name: Main Branch PR Workflow
-
 on:
+  #push:
   workflow_dispatch:
     inputs:
       branch_name:
@@ -14,25 +13,32 @@ on:
         type: string 
       PR_REPO_NAME:
         required: true
-        type: string
-
+        type: string   
+env:
+  username: "${{github.actor}}"
+  branch: "${{ github.event.inputs.branch_name }}"
+  
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Check Inputs
-      run: |
-        echo "Branch Name: ${{ github.event.inputs.branch_name }}"
-        echo "PR Issue Number: ${{ github.event.inputs.PR_ISSUE_NUMBER }}"
-        echo "PR Repo Owner: ${{ github.event.inputs.PR_REPO_OWNER }}"
-        echo "PR Repo Name: ${{ github.event.inputs.PR_REPO_NAME }}"
-        
+    steps: 
+    
+    - uses: oNaiPs/secrets-to-env-action@v1
+      with:
+        secrets: ${{ toJSON(secrets) }}
+    #- run: echo "Value of MY_SECRET1 $CMNAWAGAMUWA_DEV_PASSWORD"
+      
+   # - name: test curl
+      #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=${{ github.event.inputs.branch_name }}    
+      #run: echo "${{ github.event.inputs.branch_name }}"
+      
     - name: Checkout  
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
 
@@ -55,20 +61,25 @@ jobs:
     - name: Comment on Main PR
       uses: actions/github-script@v5
       with:
-        github-token: ${{ secrets.PAT_TOKEN }}
+        github-token: ${{secrets.PAT_TOKEN}}
+        # run: echo 'owner ${{ github.event.inputs.PR_REPO_OWNER }} prreponame:${{ github.event.inputs.PR_REPO_NAME }}  '
+
+        
         script: |
-          const issue_number = parseInt('${{ github.event.inputs.PR_ISSUE_NUMBER }}');
-          const repo_owner = "${{ github.event.inputs.PR_REPO_OWNER }}";
-          const repo_name = "${{ github.event.inputs.PR_REPO_NAME }}";
+            const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
+            const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
+            const repo_name = "${{ inputs.PR_REPO_NAME }}";
 
-          const resultsMessage = `🎉 Test Results 🎉
-          ✅ Passed: ${{ steps.report.outputs.passed }}
-          ❌ Failed: ${{ steps.report.outputs.failed }}
-          ⏭️ Skipped: ${{ steps.report.outputs.skipped }}`;
+    
+            github.rest.issues.createComment({
+              issue_number: issue_number,
+              owner: repo_owner,
+              repo: repo_name,
+               body: `🎉 Test Results 🎉
 
-          github.rest.issues.createComment({
-            issue_number: issue_number,
-            owner: repo_owner,
-            repo: repo_name,
-            body: resultsMessage
-          })
+                      ✅ Passed: ${{ steps.report.outputs.passed }}
+                      ❌ Failed: ${{ steps.report.outputs.failed }}
+                      ⏭️ Skipped: ${{ steps.report.outputs.skipped }}
+                      
+                      Keep up the good work! 👍`
+            })
