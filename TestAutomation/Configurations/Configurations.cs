@@ -52,7 +52,7 @@ namespace TestAutomation
             GitHubUser = "dubeywati";
             BranchName = "master";
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
-            URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
+            URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL_TEST");
             JenkinsUser = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_USER");
             Username = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_USERNAME");
             Password = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_PASSWORD");
