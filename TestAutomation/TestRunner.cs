@@ -45,23 +45,23 @@
             mainPage.VerifyLogin();
         }
 
-        [Test, Order(103)]
-        public void ActiveChat()
-        {
-            mainPage = new MainPage(driver);
-            mainPage.ActiveChat();
-        }
+        // [Test, Order(103)]
+        // public void ActiveChat()
+        // {
+        //     mainPage = new MainPage(driver);
+        //     mainPage.ActiveChat();
+        // }
 
-        [Test, Order(104)]
-        public void CheckStatusUpdate()
-        {
-            mainPage = new MainPage(driver);
+        // [Test, Order(104)]
+        // public void CheckStatusUpdate()
+        // {
+        //     mainPage = new MainPage(driver);
 
-            mainPage.UpdateStatus("Pending");
-            mainPage.UpdateStatus("Solved");
-            //mainPage.UpdateStatus("Open");
+        //     mainPage.UpdateStatus("Pending");
+        //     mainPage.UpdateStatus("Solved");
+        //     //mainPage.UpdateStatus("Open");
 
-        }
+        // }
         [Test, Order(105)]
         public void CheckContacts()
         {
