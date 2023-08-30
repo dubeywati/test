@@ -75,7 +75,7 @@ jobs:
               issue_number: issue_number,
               owner: repo_owner,
               repo: repo_name,
-               body: `🎉 Test Results 🎉
+               body: `🎉 Test Results 🎉 from main branch
 
                       ✅ Passed: ${{ steps.report.outputs.passed }}
                       ❌ Failed: ${{ steps.report.outputs.failed }}
