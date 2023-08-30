@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{B2D1A951-0E72-4B21-A1F5-5BE999B2E26E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestAutomation/Configurations/Configurations.cs">
+    <Files>
+      <File FileName="TestAutomation/Configurations/Configurations.cs" Line="16" Column="40" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TestAutomation" expanded="True">
+            <Node name="TestAutomation" expanded="True">
+              <Node name="Configurations" expanded="True">
+                <Node name="Configurations.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="TestAutomation" expanded="True">
+            <Node name="TestAutomation" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.TestAutomation PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mac-book-user/Projects/AutomationWithGitHubAction/TestAutomation/TestAutomation.csproj": {}
+    "/Users/mac-book-user/Documents/GitHub/test/TrailAutomation/TestAutomation.csproj": {}
   },
   "projects": {
-    "/Users/mac-book-user/Projects/AutomationWithGitHubAction/TestAutomation/TestAutomation.csproj": {
+    "/Users/mac-book-user/Documents/GitHub/test/TrailAutomation/TestAutomation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mac-book-user/Projects/AutomationWithGitHubAction/TestAutomation/TestAutomation.csproj",
+        "projectUniqueName": "/Users/mac-book-user/Documents/GitHub/test/TrailAutomation/TestAutomation.csproj",
         "projectName": "TestAutomation",
-        "projectPath": "/Users/mac-book-user/Projects/AutomationWithGitHubAction/TestAutomation/TestAutomation.csproj",
+        "projectPath": "/Users/mac-book-user/Documents/GitHub/test/TrailAutomation/TestAutomation.csproj",
         "packagesPath": "/Users/mac-book-user/.nuget/packages/",
-        "outputPath": "/Users/mac-book-user/Projects/AutomationWithGitHubAction/TestAutomation/obj/",
+        "outputPath": "/Users/mac-book-user/Documents/GitHub/test/TrailAutomation/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mac-book-user/.nuget/NuGet/NuGet.Config"
