@@ -31,28 +31,28 @@ namespace TestAutomation
              * you should change back to true. the variable "BranchName" value need to be change accordingly.
              * */
 
-            if (false)
+            if (true)
                 LoadSeetingsForGitHubAction();
             else
                 LoadSeetingsForLocalRun();
 
 
 
-            //CheckBuildStatus();
+            CheckBuildStatus();
 
             //TriggerJenkinsJob();
 
-            //CheckBuildStatus();
+            CheckBuildStatus();
 
         }
 
         void LoadSeetingsForGitHubAction()
         {
 
-            GitHubUser = Environment.GetEnvironmentVariable("USERNAME");
-            BranchName = Environment.GetEnvironmentVariable("BRANCH");
+            GitHubUser = dubeywati;
+            BranchName = main;
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
-            URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
+            URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL_TEST");
             JenkinsUser = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_USER");
             Username = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_USERNAME");
             Password = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_PASSWORD");
