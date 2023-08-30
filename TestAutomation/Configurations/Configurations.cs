@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -38,11 +38,11 @@ namespace TestAutomation
 
 
 
-            //CheckBuildStatus();
+            CheckBuildStatus();
 
-            //TriggerJenkinsJob();
+            // TriggerJenkinsJob();
 
-            //CheckBuildStatus();
+            CheckBuildStatus();
 
         }
 
@@ -50,7 +50,7 @@ namespace TestAutomation
         {
 
             GitHubUser = "dubeywati";
-            BranchName = Environment.GetEnvironmentVariable("branch");
+            BranchName = "master";
             JenkinsApiToken = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_API_TOKEN");
             URL = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_DEV_URL");
             JenkinsUser = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_USER");
@@ -59,17 +59,18 @@ namespace TestAutomation
             JenkinsJobName = Environment.GetEnvironmentVariable($"{GitHubUser.ToUpper()}_JENKINS_DEPLOYMENT_JOB_NAME");
         }
 
-        void LoadSeetingsForLocalRun()
+      void LoadSeetingsForLocalRun()
         {
-            GitHubUser = "aaditya-20";
+            GitHubUser = "dubeywati";
             BranchName = "master";
-            JenkinsApiToken = "11ba9807c51334e9f5a7a9a7db8eabaa24";
-            URL = "https://live-104103.watiapp.io";
-            JenkinsUser = "aaditya_20";
-            Username = "aaditya@clare.ai";
-            Password = "aA9SEk6tYj&ihBRcxOZ6";
-            JenkinsJobName = "first-job";
+            JenkinsApiToken = "111189db382717f939012be0b4b14dfa72";
+            URL = "https://live-300005.watiapp.io/";
+            JenkinsUser = "abhishek";
+            Username = "abhishek@clare.ai";
+            Password = "Abhishek@1";
+            JenkinsJobName = "wati";
         }
+
 
         public void TriggerJenkinsJob()
         {
