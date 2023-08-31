@@ -41,10 +41,11 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release -p:SourceRoot=${{github.workspace}}/Live -p:RestorePackages=false
 
     - name: Execute Regression Test
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test --logger "trx;LogFileName=test-results.trx" -p:SourceRoot=${{github.workspace}}/Live -p:RestorePackages=false
+
 
     - name: Generate Regression Test Report
       id : report
