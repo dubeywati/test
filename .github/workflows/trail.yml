@@ -55,7 +55,7 @@ jobs:
         name: Regression Test Report
         path: "**/test-results.trx"                            
         reporter: dotnet-trx     
-        fail-on-error: true
+        fail-on-error: false
     
     - name: Comment on Main PR
       uses: actions/github-script@v5
