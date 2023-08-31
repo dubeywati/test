@@ -26,7 +26,7 @@ namespace TestAutomation
             //IWebElement buttonElement = webDriver.Driver.FindElement(By.CssSelector("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1yxmbwk"));
 
             // Click on the button
-            messageButton.Click();
+            // messageButton.Click();
             Task.Delay(1000).Wait();
         }
 
