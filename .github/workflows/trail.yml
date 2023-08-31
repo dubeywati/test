@@ -1,5 +1,6 @@
+name: Run Project in Trail Folder
+
 on:
-  #push:
   workflow_dispatch:
     inputs:
       branch_name:
@@ -14,28 +15,25 @@ on:
       PR_REPO_NAME:
         required: true 
         type: string   
+
 env:
   username: "${{github.actor}}"
   branch: "${{ github.event.inputs.branch_name }}"
-  
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps: 
-    
     - uses: oNaiPs/secrets-to-env-action@v1
       with:
         secrets: ${{ toJSON(secrets) }}
-    #- run: echo "Value of MY_SECRET1 $CMNAWAGAMUWA_DEV_PASSWORD"
-      
-   # - name: test curl
-      #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=${{ github.event.inputs.branch_name }}    
-      #run: echo "${{ github.event.inputs.branch_name }}"
-      
+
     - name: Checkout  
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
+
+    - name: Navigate to Trail Folder
+      run: cd Trail
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -62,14 +60,10 @@ jobs:
       uses: actions/github-script@v5
       with:
         github-token: ${{secrets.PAT_TOKEN}}
-        # run: echo 'owner ${{ github.event.inputs.PR_REPO_OWNER }} prreponame:${{ github.event.inputs.PR_REPO_NAME }}  '
-
-        
         script: |
             const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
             const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
             const repo_name = "${{ inputs.PR_REPO_NAME }}";
-
     
             github.rest.issues.createComment({
               issue_number: issue_number,
