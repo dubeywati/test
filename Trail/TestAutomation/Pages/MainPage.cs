@@ -23,10 +23,10 @@ namespace TestAutomation
             Assert.That(messageButton.Displayed, Is.True);
             Task.Delay(1000).Wait();
              // Find the button element using CSS selector
-            IWebElement buttonElement = webDriver.Driver.FindElement(By.CssSelector("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1yxmbwk"));
+            // IWebElement buttonElement = webDriver.Driver.FindElement(By.CssSelector("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1yxmbwk"));
 
             // Click on the button
-            buttonElement.Click();
+            messageButton.Click();
             Task.Delay(1000).Wait();
         }
 
