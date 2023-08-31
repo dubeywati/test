@@ -5,7 +5,7 @@ on:
     inputs:
       branch_name:
         required: true
-        type: string
+        type: string 
       PR_ISSUE_NUMBER:
         required: true
         type: string
