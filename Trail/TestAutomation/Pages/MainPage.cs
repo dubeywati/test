@@ -17,13 +17,13 @@ namespace TestAutomation
 
         public IWebElement SignoutConfirmedBtn => webDriver.Driver.FindElement(By.XPath("//button[@color='negative' and contains(text(), 'Sign out')]"));
 
-        public void VerifyLogin()
+         public void VerifyLogin()
         {
             var messageButton = webDriver.Driver.FindElement(By.CssSelector("[data-testid='teamInbox-leftSide-actionBar-newMessage-button']"));
             Assert.That(messageButton.Displayed, Is.True);
             Task.Delay(1000).Wait();
-             // Find the button element using CSS selector
-            // IWebElement buttonElement = webDriver.Driver.FindElement(By.CssSelector("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1yxmbwk"));
+            // Find the button element using CSS selector
+            //IWebElement buttonElement = webDriver.Driver.FindElement(By.CssSelector("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1yxmbwk"));
 
             // Click on the button
             messageButton.Click();
