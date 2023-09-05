@@ -40,7 +40,7 @@ namespace TestAutomation
 
             CheckBuildStatus();
 
-            TriggerJenkinsJob();
+            // TriggerJenkinsJob();
 
             CheckBuildStatus();
 
