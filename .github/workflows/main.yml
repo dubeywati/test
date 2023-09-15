@@ -1,5 +1,93 @@
+# on:
+#   #push:
+#   workflow_dispatch:
+#     inputs:
+#       branch_name:
+#         required: true
+#         type: string
+#       PR_ISSUE_NUMBER:
+#         required: true
+#         type: string
+#       PR_REPO_OWNER:
+#         required: true
+#         type: string 
+#       PR_REPO_NAME:
+#         required: true
+#         type: string   
+# env:
+#   username: "${{github.actor}}"
+#   branch: "${{ github.event.inputs.branch_name }}"
+  
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     steps: 
+    
+#     - uses: oNaiPs/secrets-to-env-action@v1
+#       with:
+#         secrets: ${{ toJSON(secrets) }}
+#     #- run: echo "Value of MY_SECRET1 $CMNAWAGAMUWA_DEV_PASSWORD"
+      
+#    # - name: test curl
+#       #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=${{ github.event.inputs.branch_name }}    
+#       #run: echo "${{ github.event.inputs.branch_name }}"
+      
+#     - name: Checkout  
+#       uses: actions/checkout@v1
+
+#     - name: Setup .NET Core
+#       uses: actions/setup-dotnet@v1
+#       with:
+#         dotnet-version: 6.0.x
+
+#     - name: Build
+#       run: dotnet build --configuration Release
+
+#     - name: Execute Regression Test
+#       run: dotnet test --logger "trx;LogFileName=test-results.trx"
+
+#     - name: Generate Regression Test Report
+#       id : report
+#       uses: dorny/test-reporter@v1
+#       if: always()
+#       with:
+#         name: Regression Test Report
+#         path: "**/test-results.trx"                            
+#         reporter: dotnet-trx     
+#         fail-on-error: true
+    
+#     - name: Comment on Main PR
+#       uses: actions/github-script@v5
+#       with:
+#         github-token: ${{secrets.PAT_TOKEN0}}
+#         # run: echo 'owner ${{ github.event.inputs.PR_REPO_OWNER }} prreponame:${{ github.event.inputs.PR_REPO_NAME }}  '
+
+        
+#         script: |
+#             const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
+#             const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
+#             const repo_name = "${{ inputs.PR_REPO_NAME }}";
+
+    
+#             github.rest.issues.createComment({
+#               issue_number: issue_number,
+#               owner: repo_owner,
+#               repo: repo_name,
+#                body: `🎉 Test Results 🎉
+
+#                       ✅ Passed: ${{ steps.report.outputs.passed }}
+#                       ❌ Failed: ${{ steps.report.outputs.failed }}
+#                       ⏭️ Skipped: ${{ steps.report.outputs.skipped }}
+                      
+#                       Keep up the good work! 👍`
+#             })
+
+
+name: Main Workflow
+
 on:
-  #push:
   workflow_dispatch:
     inputs:
       branch_name:
@@ -10,76 +98,81 @@ on:
         type: string
       PR_REPO_OWNER:
         required: true
-        type: string 
+        type: string
       PR_REPO_NAME:
         required: true
-        type: string   
+        type: string
+
 env:
-  username: "${{github.actor}}"
+  username: "${{ github.actor }}"
   branch: "${{ github.event.inputs.branch_name }}"
-  
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    steps:
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
 
-    steps: 
-    
-    - uses: oNaiPs/secrets-to-env-action@v1
-      with:
-        secrets: ${{ toJSON(secrets) }}
-    #- run: echo "Value of MY_SECRET1 $CMNAWAGAMUWA_DEV_PASSWORD"
-      
-   # - name: test curl
-      #run: curl -u chathura:11fa578250a0669701d9a2b66354a2c441 -X POST https://ci.clare.ai/job/DEV-CHATHURA-Inbox-BUILD-DEPLOY-102914/buildWithParameters?token=apiToken -F BUILD_BRANCH=${{ github.event.inputs.branch_name }}    
-      #run: echo "${{ github.event.inputs.branch_name }}"
-      
-    - name: Checkout  
-      uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
 
-    - name: Build
-      run: dotnet build --configuration Release
+      - name: Build
+        run: |
+          echo "Building..."
+          dotnet build --configuration Release || echo "::set-output name=client_payload::{\"error_message\":\"Build failed\"}"
 
-    - name: Execute Regression Test
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"
+      - name: Execute Regression Test
+        run: |
+          echo "Testing..."
+          dotnet test --logger "trx;LogFileName=test-results.trx" || echo "::set-output name=client_payload::{\"error_message\":\"Test execution failed\"}"
 
-    - name: Generate Regression Test Report
-      id : report
-      uses: dorny/test-reporter@v1
-      if: always()
-      with:
-        name: Regression Test Report
-        path: "**/test-results.trx"                            
-        reporter: dotnet-trx     
-        fail-on-error: true
-    
-    - name: Comment on Main PR
-      uses: actions/github-script@v5
-      with:
-        github-token: ${{secrets.PAT_TOKEN0}}
-        # run: echo 'owner ${{ github.event.inputs.PR_REPO_OWNER }} prreponame:${{ github.event.inputs.PR_REPO_NAME }}  '
+      - name: Generate Regression Test Report
+        id: report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Regression Test Report
+          path: "**/test-results.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
 
-        
-        script: |
+      - name: Comment on Main PR
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.PAT_TOKEN0 }}
+          script: |
             const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
             const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
             const repo_name = "${{ inputs.PR_REPO_NAME }}";
+            const buildErrorMessage = "${{ steps.build.outputs.client_payload }}";
+            const testErrorMessage = "${{ steps['Execute Regression Test'].outputs.client_payload }}";
 
-    
+            let errorMessage = "";
+
+            if (buildErrorMessage) {
+              errorMessage += `Build: ${buildErrorMessage}\n`;
+            }
+            if (testErrorMessage) {
+              errorMessage += `Testing: ${testErrorMessage}\n`;
+            }
+
+            if (errorMessage) {
+              errorMessage = "❌ Job Failures:\n" + errorMessage;
+            } else {
+              errorMessage = "✅ All Jobs Passed!";
+            }
+
             github.rest.issues.createComment({
               issue_number: issue_number,
               owner: repo_owner,
               repo: repo_name,
-               body: `🎉 Test Results 🎉
-
-                      ✅ Passed: ${{ steps.report.outputs.passed }}
-                      ❌ Failed: ${{ steps.report.outputs.failed }}
-                      ⏭️ Skipped: ${{ steps.report.outputs.skipped }}
-                      
-                      Keep up the good work! 👍`
+              body: `🎉 Test Results 🎉\n\n${errorMessage}`
             })
+
