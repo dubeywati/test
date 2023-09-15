@@ -89,14 +89,16 @@ jobs:
             const repo_name = "${{ inputs.PR_REPO_NAME }}";
 
             github.rest.issues.createComment({
-              issue_number: issue_number,
-              owner: repo_owner,
-              repo: repo_name,
-              body: `❌ Failed in Trail ENV Workflow 🚨
-
-                    There was a failure in the Trail environment workflow.
-
-                    You can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).
-                    
-                    Please investigate and address the issue.`,
+            issue_number: issue_number,
+            owner: repo_owner,
+            repo: repo_name,
+            body: ```
+                ❌ Failed in Trail ENV Workflow 🚨
+    
+                There was a failure in the Trail environment workflow.
+    
+                You can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).
+    
+                Please investigate and address the issue.
+                ```
             })
