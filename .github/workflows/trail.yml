@@ -1,4 +1,4 @@
-name: Run Project in Trail Folder
+name: Run Project in Trial Folder
 
 on:
   workflow_dispatch:
@@ -33,18 +33,18 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Navigate to Trail Folder
-      run: cd Trail
+      run: cd Trial
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
 
-    - name: Build TrailAutomation.sln
-      run: dotnet build --configuration Release -p:RestorePackages=false "TrailAutomation.sln"
+    - name: Build TrialAutomation.sln
+      run: dotnet build --configuration Release -p:RestorePackages=false "TrialAutomation.sln"
       
     - name: Execute Regression Test
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"  "Trail/TestAutomation/TestAutomation.csproj"
+      run: dotnet test --logger "trx;LogFileName=test-results.trx"  "Trial/TestAutomation/TestAutomation.csproj"
 
 
     - name: Generate Regression Test Report
