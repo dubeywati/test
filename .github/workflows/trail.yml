@@ -187,18 +187,9 @@ jobs:
             issue_number: issue_number,
             owner: repo_owner,
             repo: repo_name,
-            body: `
-                ❌ Failed in Trail ENV Workflow 🚨
-
-                There was a failure in the Trail environment workflow.
-
-                Error Reason:
-                ${failureReason}
-
-                You can view the workflow run <a href="https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id}}">here</a>.
-                
-                You can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).
-
-                Please investigate and address the issue.
-                `
+            body: `❌ Failed in Trail ENV Workflow 🚨\n\nThere was a failure in the Trail environment workflow.\n\nError Reason:\n${failureReason}\n\nYou can view the workflow run [here](${workflowRunURL}).\n\nPlease investigate and address the issue.`
+            
+            
+            
             })
+           
