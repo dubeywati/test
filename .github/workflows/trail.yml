@@ -181,6 +181,7 @@ jobs:
             const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
             const repo_name = "${{ inputs.PR_REPO_NAME }}";
             const failureReason = process.env.FAILURE_REASON;
+            const workflowRunURL = "${{ github.run_url }}";
 
             github.rest.issues.createComment({
             issue_number: issue_number,
@@ -194,6 +195,8 @@ jobs:
                 Error Reason:
                 ${failureReason}
 
+                You can view the workflow run [here](${workflowRunURL}).
+                
                 You can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).
 
                 Please investigate and address the issue.
