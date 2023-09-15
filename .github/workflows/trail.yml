@@ -146,7 +146,7 @@ jobs:
           echo "FAILURE_REASON=Failed to navigate to Trail folder" >> $GITHUB_ENV
           exit 1
         fi
-        cd Trail || { echo "❌ Failed to navigate to Trail folder."; echo "FAILURE_REASON=Failed to navigate to Trail folder" >> $GITHUB_ENV; exit 1; }
+        cd trial || { echo "❌ Failed to navigate to Trail folder."; echo "FAILURE_REASON=Failed to navigate to Trail folder" >> $GITHUB_ENV; exit 1; }
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
