@@ -57,28 +57,27 @@ jobs:
         reporter: dotnet-trx     
         fail-on-error: true
     
-    - name: Comment on Main PR
-      uses: actions/github-script@v5
-      if: failure()
-      with:
-        github-token: ${{secrets.PAT_TOKEN}}
-        script: |
-            const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
-            const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
-            const repo_name = "${{ inputs.PR_REPO_NAME }}";
+    # - name: Comment on Main PR
+    #   uses: actions/github-script@v5
+    #   with:
+    #     github-token: ${{secrets.PAT_TOKEN}}
+    #     script: |
+    #         const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
+    #         const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
+    #         const repo_name = "${{ inputs.PR_REPO_NAME }}";
     
-            github.rest.issues.createComment({
-              issue_number: issue_number,
-              owner: repo_owner,
-              repo: repo_name,
-               body: `🎉 Live ENV Test Results 🎉
+    #         github.rest.issues.createComment({
+    #           issue_number: issue_number,
+    #           owner: repo_owner,
+    #           repo: repo_name,
+    #            body: `🎉 Live ENV Test Results 🎉
 
-                      ✅ Passed: ${{ steps.report.outputs.passed }}
-                      ❌ Failed: ${{ steps.report.outputs.failed }}
-                      ⏭️ Skipped: ${{ steps.report.outputs.skipped }}
+    #                   ✅ Passed: ${{ steps.report.outputs.passed }}
+    #                   ❌ Failed: ${{ steps.report.outputs.failed }}
+    #                   ⏭️ Skipped: ${{ steps.report.outputs.skipped }}
                       
-                      Keep up the good work! 👍`
-            })
+    #                   Keep up the good work! 👍`
+    #         })
     - name: Comment on Failure
       if: failure()
       uses: actions/github-script@v5
@@ -97,7 +96,7 @@ jobs:
 
                     There was a failure in the Trail environment workflow.
 
-                    You can view the workflow run [here](https://github.com/${repo_owner}/${repo_name}/actions/runs/${{ github.run_id }}).
+                    You can view the workflow run [here](https://github.com/${repo_owner}/${github.repository}/actions/runs/${{ github.run_id }}).
 
                     Please investigate and address the issue.`,
             })
