@@ -96,7 +96,7 @@ jobs:
 
                     There was a failure in the Trail environment workflow.
 
-                    You can view the workflow run [here](https://github.com/${repo_owner}/${github.repository}/actions/runs/${{ github.run_id }}).
+                    You can view the workflow run [here](https://github.com/${repo_owner}/${github.event.repository.name}/actions/runs/${{ github.run_id }}).
 
                     Please investigate and address the issue.`,
             })
