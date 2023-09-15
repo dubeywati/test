@@ -1,4 +1,4 @@
-name: Run Project in Live Folder
+name: Run Project in Non-Trial Folder
 
 on:
   workflow_dispatch:
@@ -32,20 +32,20 @@ jobs:
     - name: Checkout  
       uses: actions/checkout@v2
 
-    - name: Navigate to Live Folder
-      run: cd Live
+    - name: Navigate to Non-Trial Folder
+      run: cd Non-Trial
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
 
-    - name: Build TestAutomation.sln
-      run: dotnet build --configuration Release -p:RestorePackages=false "TestAutomation.sln"
+    - name: Build Non-TrialTestAutomation.sln
+      run: dotnet build --configuration Release -p:RestorePackages=false "Non-TrialTestAutomation.sln"
 
   
     - name: Execute Regression Test
-      run: dotnet test --logger "trx;LogFileName=test-results.trx" "Live/TestAutomation/TestAutomation.csproj"
+      run: dotnet test --logger "trx;LogFileName=test-results.trx" "Non-Trial/TestAutomation/TestAutomation.csproj"
 
     - name: Generate Regression Test Report
       id : report
