@@ -78,3 +78,25 @@ jobs:
                       
                       Keep up the good work! 👍`
             })
+    - name: Comment on Failure
+      if: failure()
+      uses: actions/github-script@v5
+      with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            const issue_number = parseInt('${{ inputs.PR_ISSUE_NUMBER }}');
+            const repo_owner = "${{ inputs.PR_REPO_OWNER }}";
+            const repo_name = "${{ inputs.PR_REPO_NAME }}";
+
+            github.rest.issues.createComment({
+              issue_number: issue_number,
+              owner: repo_owner,
+              repo: repo_name,
+              body: `❌ Failed in Trail ENV Workflow 🚨
+
+                    There was a failure in the Trail environment workflow.
+
+                    You can view the workflow run [here](https://github.com/${repo_owner}/${repo_name}/actions/runs/${{ github.run_id }}).
+
+                    Please investigate and address the issue.`,
+            })
