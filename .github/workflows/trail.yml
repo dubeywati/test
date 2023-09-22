@@ -61,7 +61,7 @@ jobs:
       id: report
       uses: zyborg/dotnet-tests-report@v1
       with:
-        project_path: Trial/TestAutomation
+        project_path: Trials/TestAutomation
         report_name: TrialEnvTestResult
         report_title: Trial Environment
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -88,13 +88,7 @@ jobs:
               issue_number: issue_number,
               owner: repo_owner,
               repo: repo_name,
-              body: `❌ Failed in Trial ENV Workflow
-
-                  You can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).
-
-                  Trial env test Report Url: ${{ steps.report.outputs.gist_report_url }}
-
-                  Please investigate and address the issue.`
+              body: `❌ Failed in Trail ENV Workflow 🚨\n\nThere was a failure in the Trail environment workflow.\n\nError Reason:\n${failureReason}\n\nYou can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).\n\nTrial env test Report Url: ${{ steps.report.outputs.gist_report_url }} \n\nPlease investigate and address the issue.`
             });
     
     # - name: Comment on Main PR
