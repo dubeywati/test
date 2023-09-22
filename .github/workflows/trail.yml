@@ -88,7 +88,7 @@ jobs:
               issue_number: issue_number,
               owner: repo_owner,
               repo: repo_name,
-              body: `❌ Failed in Trail ENV Workflow 🚨\n\nThere was a failure in the Trail environment workflow.\n\nError Reason:\n${failureReason}\n\nYou can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).\n\nTrial env test Report Url: ${{ steps.report.outputs.gist_report_url }} \n\nPlease investigate and address the issue.`
+              body: `❌ Failed in Trail ENV Workflow 🚨\n\nThere was a failure in the Trail environment workflow.\n\nYou can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).\n\nTrial env test Report Url: ${{ steps.report.outputs.gist_report_url }} \n\nPlease investigate and address the issue.`
             });
     
     # - name: Comment on Main PR
