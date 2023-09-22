@@ -61,7 +61,7 @@ jobs:
       id: report
       uses: zyborg/dotnet-tests-report@v1
       with:
-        project_path: Trial/TestAutomation
+        project_path: Trials/TestAutomation
         report_name: TrialEnvTestResult
         report_title: Trial Environment
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -71,10 +71,11 @@ jobs:
         fail_build_on_failed_tests: true
         gist_token: ${{ secrets.PAT_TOKEN }}
 
-
+   
+            
     - name: Comment on Main PR
       uses: actions/github-script@v5
-      if: always()
+      if: failure()
       with:
         github-token: ${{ secrets.PAT_TOKEN }}
         
@@ -87,7 +88,7 @@ jobs:
               issue_number: issue_number,
               owner: repo_owner,
               repo: repo_name,
-              body: `🎉 Trial env Test Results 🎉
+              body: `❌ Failed in Trial ENV Workflow
 
                   🔢 Total :${{ steps.report.outputs.total_count }}
                   ✅ Passed: ${{ steps.report.outputs.passed_count }}
@@ -95,7 +96,7 @@ jobs:
 
                   Trial env test Report Url: ${{ steps.report.outputs.gist_report_url }}
 
-                  Keep up the good work! 👍`
+                  Please investigate and address the issue.`
             });
     
     # - name: Comment on Main PR
