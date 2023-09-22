@@ -61,7 +61,7 @@ jobs:
       id: report
       uses: zyborg/dotnet-tests-report@v1
       with:
-        project_path: Trials/TestAutomation
+        project_path: Trial/TestAutomation
         report_name: TrialEnvTestResult
         report_title: Trial Environment
         github_token: ${{ secrets.GITHUB_TOKEN }}
