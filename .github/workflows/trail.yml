@@ -90,9 +90,7 @@ jobs:
               repo: repo_name,
               body: `❌ Failed in Trial ENV Workflow
 
-                  🔢 Total :${{ steps.report.outputs.total_count }}
-                  ✅ Passed: ${{ steps.report.outputs.passed_count }}
-                  ❌ Failed: ${{ steps.report.outputs.failed_count }}
+                  You can view the workflow run [here](https://github.com/${repo_owner}/test/actions/runs/${{ github.run_id }}).
 
                   Trial env test Report Url: ${{ steps.report.outputs.gist_report_url }}
 
