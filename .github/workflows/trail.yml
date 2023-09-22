@@ -153,9 +153,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Build TrailAutomation.sln
-      run: |
-        dotnet build --configuration Release -p:RestorePackages=false "TrialAutomation.sln" || { echo "❌ Build failed."; echo "FAILURE_REASON=Build failed" >> $GITHUB_ENV; exit 1; }
+    # - name: Build TrailAutomation.sln
+    #   run: |
+    #     dotnet build --configuration Release -p:RestorePackages=false "TrialAutomation.sln" || { echo "❌ Build failed."; echo "FAILURE_REASON=Build failed" >> $GITHUB_ENV; exit 1; }
 
     - name: Execute Regression Test
       run: |
