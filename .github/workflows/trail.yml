@@ -157,19 +157,34 @@ jobs:
     #   run: |
     #     dotnet build --configuration Release -p:RestorePackages=false "TrialAutomation.sln" || { echo "❌ Build failed."; echo "FAILURE_REASON=Build failed" >> $GITHUB_ENV; exit 1; }
 
-    - name: Execute Regression Test
-      run: |
-        dotnet test --logger "trx;LogFileName=test-results.trx" "trial/TrialAutomation/TrialAutomation.csproj" || { echo "❌ Regression test failed."; echo "FAILURE_REASON=Regression test failed" >> $GITHUB_ENV; exit 1; }
+    # - name: Execute Regression Test
+    #   run: |
+    #     dotnet test --logger "trx;LogFileName=test-results.trx" "trial/TrialAutomation/TrialAutomation.csproj" || { echo "❌ Regression test failed."; echo "FAILURE_REASON=Regression test failed" >> $GITHUB_ENV; exit 1; }
 
-    - name: Generate Regression Test Report
-      id : report
-      uses: dorny/test-reporter@v1
+    # - name: Generate Regression Test Report
+    #   id : report
+    #   uses: dorny/test-reporter@v1
+    #   if: always()
+    #   with:
+    #     name: Regression Test Report
+    #     path: "**/test-results.trx"                            
+    #     reporter: dotnet-trx     
+    #     fail-on-error: true
+
+    - name: Execute Test And Generate Test Report
+      id: report
       if: always()
+      uses: zyborg/dotnet-tests-report@v1
       with:
-        name: Regression Test Report
-        path: "**/test-results.trx"                            
-        reporter: dotnet-trx     
-        fail-on-error: true
+        project_path: trial/TestAutomation
+        report_name: TrialEnvTestResult
+        report_title: Trial Environment
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        gist_name: TrialEnvTestResult.md
+        gist_badge_label: 'Result: %Counters_passed%/%Counters_total%'
+        set_check_status_from_test_outcome: true
+        fail_build_on_failed_tests: true
+        gist_token: ${{ secrets.PAT_TOKEN }}
 
     - name: Comment on Failure
       if: failure()
